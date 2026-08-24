@@ -1,0 +1,6 @@
+{% extends "base.html" %}
+{% load wagtailcore_tags %}
+{% block content %}
+<article class="article"><header class="article__header shell"><a class="text-link" href="{{ page.get_parent.url }}">← All field notes</a><p class="eyebrow">{{ page.publication_date|date:"d F Y" }}</p><h1>{{ page.title }}</h1><p>{{ page.summary }}</p></header><div class="article__body rich-text">{{ page.body|richtext }}</div></article>
+{% endblock %}
+

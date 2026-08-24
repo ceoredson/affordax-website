@@ -1,0 +1,7 @@
+{% extends "base.html" %}
+{% load wagtailcore_tags %}
+{% block content %}
+<header class="page-hero"><div class="shell page-hero__inner"><p class="eyebrow">Field notes</p><h1>{{ page.title }}</h1><p>{{ page.introduction }}</p></div></header>
+<section class="section"><div class="shell article-grid">{% for article in articles %}<article class="article-card" data-reveal><span>{{ article.publication_date|date:"d M Y" }}</span><h2><a href="{% pageurl article %}">{{ article.title }}</a></h2><p>{{ article.summary }}</p><a class="text-link" href="{% pageurl article %}">Read note <span>→</span></a></article>{% empty %}<p>No field notes have been published yet.</p>{% endfor %}</div></section>
+{% endblock %}
+

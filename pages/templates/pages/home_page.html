@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+{% load wagtailcore_tags %}
+{% block content %}
+<section class="hero hero--home">
+  <div class="shell hero__grid">
+    <div class="hero__copy" data-reveal>
+      <p class="eyebrow">{{ page.eyebrow }}</p>
+      <h1>{{ page.hero_title }}</h1>
+      <p class="hero__lead">{{ page.hero_text }}</p>
+      <div class="action-row"><a class="button button--brand" href="{{ page.primary_url }}">{{ page.primary_label }} <span>→</span></a><a class="text-link" href="{{ page.secondary_url }}">{{ page.secondary_label }} <span>↘</span></a></div>
+      <p class="signal"><span></span>{{ page.signal_label }}</p>
+    </div>
+    <div class="network-card" aria-label="A controlled path from enquiry to reconciliation" data-reveal>
+      <div class="network-card__head"><span>One accountable thread</span><span class="network-card__status">Live controls</span></div>
+      <ol class="network-flow">
+        <li><span class="network-flow__index">01</span><div><b>Employee-authorised enquiry</b><small>The lender receives an allocation, not a salary profile.</small></div></li>
+        <li><span class="network-flow__index">02</span><div><b>Independent approval</b><small>A reservation becomes active only through maker-checker review.</small></div></li>
+        <li><span class="network-flow__index">03</span><div><b>Payroll outcome</b><small>Expected, collected and exceptional results stay traceable.</small></div></li>
+        <li><span class="network-flow__index">04</span><div><b>Reconciliation</b><small>Every difference has an owner and an evidence trail.</small></div></li>
+      </ol>
+      <div class="network-card__pulse" aria-hidden="true"><i></i><span>Signal moving through governed steps</span></div>
+    </div>
+  </div>
+  {% if page.proof_points.all %}<div class="shell proof-strip">{% for point in page.proof_points.all %}<div><strong>{{ point.value }}</strong><span>{{ point.label }}</span></div>{% endfor %}</div>{% endif %}
+</section>
+{% for block in page.body %}{% include_block block %}{% endfor %}
+{% endblock %}
+

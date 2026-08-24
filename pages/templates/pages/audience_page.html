@@ -1,0 +1,7 @@
+{% extends "base.html" %}
+{% load wagtailcore_tags %}
+{% block content %}
+<section class="audience-hero"><div class="shell audience-hero__grid"><div data-reveal><p class="eyebrow">{{ page.audience_label }}</p><h1>{{ page.hero_title }}</h1><p>{{ page.hero_text }}</p><a class="button button--brand" href="{{ page.action_url }}">{{ page.action_label }} <span>→</span></a></div><div class="audience-hero__mark" aria-hidden="true"><span>{{ page.audience_label|slice:":1" }}</span><i></i><i></i><i></i></div></div></section>
+{% for block in page.body %}{% include_block block %}{% endfor %}
+{% endblock %}
+

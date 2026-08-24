@@ -1,0 +1,48 @@
+services:
+  - type: web
+    name: public-website
+    runtime: python
+    plan: starter
+    buildCommand: bash scripts/build.sh
+    startCommand: bash scripts/start.sh
+    healthCheckPath: /health/
+    autoDeploy: false
+    envVars:
+      - key: PYTHON_VERSION
+        value: 3.14.6
+      - key: DJANGO_SETTINGS_MODULE
+        value: config.settings.production
+      - key: SECRET_KEY
+        generateValue: true
+      - key: DATABASE_URL
+        fromDatabase:
+          name: public-website-database
+          property: connectionString
+      - key: ALLOWED_HOSTS
+        sync: false
+      - key: CSRF_TRUSTED_ORIGINS
+        sync: false
+      - key: PUBLIC_SITE_URL
+        sync: false
+      - key: PORTAL_URL
+        sync: false
+      - key: SITE_NAME
+        sync: false
+      - key: SITE_DESCRIPTOR
+        sync: false
+      - key: ENQUIRY_NOTIFICATION_EMAIL
+        sync: false
+      - key: DEFAULT_FROM_EMAIL
+        sync: false
+    disk:
+      name: public-website-media
+      mountPath: /opt/render/project/src/media
+      sizeGB: 1
+
+databases:
+  - name: public-website-database
+    plan: basic-256mb
+    databaseName: public_website
+    user: public_website
+    ipAllowList: []
+

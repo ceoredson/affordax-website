@@ -1,0 +1,3 @@
+{% load wagtailcore_tags %}
+<section class="section section--paper"><div class="shell faq-layout"><div class="section-heading" data-reveal>{% if value.eyebrow %}<p class="eyebrow">{{ value.eyebrow }}</p>{% endif %}<h2>{{ value.heading }}</h2></div><div class="faq-list">{% for item in value.items %}<details data-reveal><summary>{{ item.question }}<span aria-hidden="true">+</span></summary><div class="rich-text">{{ item.answer|richtext }}</div></details>{% endfor %}</div></div></section>
+

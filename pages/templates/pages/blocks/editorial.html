@@ -1,0 +1,3 @@
+{% load wagtailcore_tags wagtailimages_tags %}
+<section class="section"><div class="shell editorial editorial--{{ value.image_side }}"><div class="editorial__copy" data-reveal>{% if value.eyebrow %}<p class="eyebrow">{{ value.eyebrow }}</p>{% endif %}<h2>{{ value.heading }}</h2><div class="rich-text">{{ value.body|richtext }}</div></div><div class="editorial__visual" data-reveal>{% if value.image %}{% image value.image fill-900x720-c100 %}{% else %}<div class="editorial__diagram"><span>INPUT</span><i></i><strong>GOVERNED<br>WORKFLOW</strong><i></i><span>OUTCOME</span></div>{% endif %}</div></div></section>
+

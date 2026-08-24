@@ -1,0 +1,2 @@
+<section class="section section--ink"><div class="shell"><div class="section-heading section-heading--light" data-reveal>{% if value.eyebrow %}<p class="eyebrow">{{ value.eyebrow }}</p>{% endif %}<h2>{{ value.heading }}</h2></div><ol class="process-list">{% for step in value.steps %}<li data-reveal><span>0{{ forloop.counter }}</span><div><h3>{{ step.title }}</h3><p>{{ step.text }}</p></div></li>{% endfor %}</ol></div></section>
+

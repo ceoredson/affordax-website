@@ -1,0 +1,7 @@
+{% extends "base.html" %}
+{% load wagtailcore_tags %}
+{% block content %}
+<header class="page-hero"><div class="shell page-hero__inner" data-reveal><p class="eyebrow">{{ page.eyebrow }}</p><h1>{{ page.title }}</h1>{% if page.introduction %}<p>{{ page.introduction }}</p>{% endif %}</div></header>
+{% for block in page.body %}{% include_block block %}{% endfor %}
+{% endblock %}
+

@@ -1,0 +1,7 @@
+{% load wagtailcore_tags %}
+<nav class="primary-nav" id="primary-menu" data-menu aria-label="Primary navigation">
+  {% for item in items %}
+    <a href="{% pageurl item %}"{% if current_page and current_page.url_path == item.url_path %} aria-current="page"{% endif %}>{{ item.title }}</a>
+  {% endfor %}
+  <a class="button button--brand primary-nav__mobile-action" href="{% url 'enquiries:form' 'demo' %}">Book a conversation</a>
+</nav>

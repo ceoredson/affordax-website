@@ -1,0 +1,52 @@
+{% load static wagtailcore_tags navigation_tags %}
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="theme-color" content="{{ settings.brand.SiteIdentity.ink_colour|default:'#17202a' }}">
+  <title>{% block title %}{% if page.seo_title %}{{ page.seo_title }}{% elif page %}{{ page.title }}{% else %}Public website{% endif %} · {{ settings.brand.SiteIdentity.display_name|default:'Company' }}{% endblock %}</title>
+  <meta name="description" content="{% block description %}{{ page.search_description|default:'Clear information for employers and financial providers.' }}{% endblock %}">
+  <link rel="canonical" href="{{ request.scheme }}://{{ request.get_host }}{{ request.path }}">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="{{ settings.brand.SiteIdentity.display_name|default:'Company' }}">
+  <meta property="og:title" content="{% if page.seo_title %}{{ page.seo_title }}{% elif page %}{{ page.title }}{% else %}Public website{% endif %}">
+  <meta property="og:description" content="{{ page.search_description|default:'Clear information for employers and financial providers.' }}">
+  <meta property="og:url" content="{{ request.scheme }}://{{ request.get_host }}{{ request.path }}">
+  <meta property="og:image" content="{{ request.scheme }}://{{ request.get_host }}{% static 'images/social-preview.svg' %}">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="icon" href="{% static 'images/favicon.svg' %}" type="image/svg+xml">
+  <link rel="stylesheet" href="{% static 'css/tokens.css' %}">
+  <link rel="stylesheet" href="{% static 'css/base.css' %}">
+  <link rel="stylesheet" href="{% static 'css/components.css' %}">
+  <link rel="stylesheet" href="{% static 'css/pages.css' %}">
+  <style>:root{--brand:{{ settings.brand.SiteIdentity.primary_colour|default:'#ef5b3f' }};--ink:{{ settings.brand.SiteIdentity.ink_colour|default:'#17202a' }}}</style>
+  {% block extra_head %}{% endblock %}
+</head>
+<body>
+  <a class="skip-link" href="#content">Skip to content</a>
+  <header class="site-header" data-header>
+    <div class="shell site-header__inner">
+      <a class="wordmark" href="/" aria-label="{{ settings.brand.SiteIdentity.display_name|default:'Company' }} home">
+        <span class="wordmark__signal" aria-hidden="true"></span>
+        <span>{{ settings.brand.SiteIdentity.display_name|default:'Company' }}</span>
+      </a>
+      <button class="menu-button" type="button" data-menu-button aria-controls="primary-menu" aria-expanded="false"><span></span><span></span><span></span><span class="sr-only">Open navigation</span></button>
+      {% primary_navigation %}
+      <a class="button button--ink site-header__portal" href="{{ settings.brand.SiteIdentity.portal_url|default:configured_portal_url }}">Institution sign in <span aria-hidden="true">↗</span></a>
+    </div>
+  </header>
+  <main id="content">{% block content %}{% endblock %}</main>
+  <footer class="site-footer">
+    <div class="shell site-footer__top">
+      <div><a class="wordmark wordmark--light" href="/"><span class="wordmark__signal"></span>{{ settings.brand.SiteIdentity.display_name|default:'Company' }}</a><p>{{ settings.brand.SiteIdentity.descriptor|default:'Affordability and payroll, connected' }}</p></div>
+      <div><span class="footer-label">Explore</span><a href="/how-it-works/">How it works</a><a href="/employers/">For employers</a><a href="/providers/">For providers</a><a href="/insights/">Insights</a></div>
+      <div><span class="footer-label">Company</span><a href="/about/">About</a><a href="/trust/">Trust centre</a><a href="{% url 'enquiries:form' 'contact' %}">Contact</a><a href="{% url 'enquiries:form' 'complaint' %}">Complaints</a></div>
+      <div><span class="footer-label">Access</span><a href="{{ settings.brand.SiteIdentity.portal_url|default:configured_portal_url }}">Institution portal ↗</a><a href="/privacy/">Privacy</a><a href="/terms/">Terms</a></div>
+    </div>
+    <div class="shell site-footer__bottom"><span>© {% now "Y" %} {{ settings.brand.SiteIdentity.legal_name|default:'Company' }}</span><span>{{ settings.brand.SiteIdentity.office|default:'Lilongwe, Malawi' }}</span><span>Built for accountable work.</span></div>
+  </footer>
+  <script src="{% static 'js/site.js' %}" defer></script>
+  {% block extra_js %}{% endblock %}
+</body>
+</html>

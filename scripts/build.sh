@@ -1,0 +1,7 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+python -m pip install --only-binary=:all: -r requirements.txt
+python manage.py collectstatic --noinput
+python manage.py check --deploy
+
