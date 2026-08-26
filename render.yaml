@@ -3,8 +3,8 @@ services:
     name: public-website
     runtime: python
     plan: starter
-    buildCommand: bash scripts/build.sh
-    startCommand: bash scripts/start.sh
+    buildCommand: bash scripts/render_build.sh
+    startCommand: bash scripts/render_start.sh
     healthCheckPath: /health/
     autoDeploy: false
     envVars:

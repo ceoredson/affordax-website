@@ -63,8 +63,8 @@ The local settings use SQLite by default. To test against Supabase, replace
 
 `render.yaml` defines one web service. In Render, set `DATABASE_URL` to the
 Supabase connection string and configure the other `sync: false` values from
-the Render dashboard. Render runs `scripts/build.sh` during build and
-`scripts/start.sh` on boot; the latter applies migrations, seeds the Wagtail
+the Render dashboard. Render runs `scripts/render_build.sh` during build and
+`scripts/render_start.sh` on boot; the latter applies migrations, seeds the Wagtail
 site, and starts Gunicorn.
 
 Do not commit `.env` or Supabase credentials. The committed `.env.example` is
