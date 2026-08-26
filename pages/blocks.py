@@ -82,6 +82,19 @@ class QuoteBlock(blocks.StructBlock):
         label = "Quote"
 
 
+class FounderProfileBlock(blocks.StructBlock):
+    image = ImageChooserBlock()
+    name = blocks.CharBlock(max_length=100)
+    role = blocks.CharBlock(max_length=120)
+    heading = blocks.CharBlock(max_length=160)
+    body = blocks.RichTextBlock(features=["bold", "italic", "link"])
+
+    class Meta:
+        template = "pages/blocks/founder_profile.html"
+        icon = "user"
+        label = "Founder profile"
+
+
 class FAQItemBlock(blocks.StructBlock):
     question = blocks.CharBlock(max_length=160)
     answer = blocks.RichTextBlock(features=["bold", "italic", "link", "ol", "ul"])
@@ -117,7 +130,7 @@ PUBLIC_BLOCKS = [
     ("metric_band", MetricBandBlock()),
     ("editorial", EditorialBlock()),
     ("quote", QuoteBlock()),
+    ("founder", FounderProfileBlock()),
     ("faq", FAQBlock()),
     ("call_to_action", CallToActionBlock()),
 ]
-

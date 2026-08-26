@@ -1,0 +1,19 @@
+{% load wagtailcore_tags wagtailimages_tags %}
+<section class="section founder-profile" data-reveal>
+  <div class="shell founder-profile__grid">
+    <figure class="founder-profile__portrait">
+      {% image value.image fill-920x1120 format-webp as portrait %}
+      <img src="{{ portrait.url }}" width="{{ portrait.width }}" height="{{ portrait.height }}" alt="{{ value.name }}, {{ value.role }}" loading="lazy">
+      <figcaption>{{ value.name }} · {{ value.role }}</figcaption>
+    </figure>
+    <div class="founder-profile__story">
+      <p class="eyebrow">Leadership</p>
+      <h2>{{ value.heading }}</h2>
+      <div class="rich-text">{{ value.body|richtext }}</div>
+      <div class="founder-profile__signature">
+        <strong>{{ value.name }}</strong>
+        <span>{{ value.role }}</span>
+      </div>
+    </div>
+  </div>
+</section>

@@ -1,6 +1,11 @@
 from datetime import date
+from pathlib import Path
+from uuid import uuid4
 
+from django.conf import settings
+from django.core.files.images import ImageFile
 from django.core.management.base import BaseCommand
+from wagtail.images import get_image_model
 from wagtail.models import Page, Site
 
 from pages.models import (
@@ -98,7 +103,8 @@ class Command(BaseCommand):
         self._audience(home, "Financial providers", "providers", "For financial providers", "Know what can be allocated. Follow what was collected.", "Originate salary-backed products through an authorised, privacy-conscious workflow connected to payroll and reconciliation.", "Start a provider conversation", "/enquire/provider/", PROVIDER_BODY)
         self._standard(home, "How it works", "how-it-works", "The operating model", "Four linked decisions—not one black-box score.", [process("The complete path", [("Employee request", "The provider records purpose and authority evidence."), ("Affordability", "Configured policy returns a privacy-safe allocation."), ("Reservation and approval", "A temporary hold supports an independently reviewed instruction."), ("Payroll and reconciliation", "Every due obligation receives a result and every variance can be investigated.")]), cta("See it against your own process.", "A useful demonstration starts with the questions your teams already argue about.", "Book a conversation", "/enquire/demo/")])
         self._standard(home, "Trust centre", "trust", "Trust is operational", "Controls matter only when people can see who acts, what changes and how recovery works.", [features("A visible control model", [("Scoped access", "Institution and role determine what a user may see and do."), ("Independent decisions", "Sensitive financial actions use distinct proposal and approval responsibilities."), ("Preserved evidence", "Important financial history is corrected through new evidence, not silent rewriting."), ("Incident discipline", "Incorrect allocation, privacy exposure or unexplained variance should stop intake and preserve records.")]), cta("Bring your security questions.", "Ask about data handling, integration, access and operational recovery before discussing rollout.", "Contact the team", "/enquire/contact/")])
-        self._standard(home, "About", "about", "Why this work exists", "Private-sector payroll should make responsible financial access easier—not make employees, employers and providers carry more administrative uncertainty.", [("editorial", {"eyebrow": "A neutral operating layer", "heading": "Built between institutions, accountable to the people in the records.", "body": "<p>The platform does not issue loans or replace an employer's lawful payroll authority. It coordinates how authorised affordability, obligations, payroll outcomes and disputes move between organisations.</p><p>Our measure of progress is not the number of screens. It is whether each participant can understand its responsibility and reconcile the result.</p>", "image_side": "left"}), cta("Help shape the operating standard.", "We are speaking with employers, providers and specialists who know where existing processes break.", "Talk with us", "/enquire/contact/")])
+        about = self._standard(home, "About", "about", "Why this work exists", "Private-sector payroll should make responsible financial access easier—not make employees, employers and providers carry more administrative uncertainty.", [("editorial", {"eyebrow": "A neutral operating layer", "heading": "Built between institutions, accountable to the people in the records.", "body": "<p>The platform does not issue loans or replace an employer's lawful payroll authority. It coordinates how authorised affordability, obligations, payroll outcomes and disputes move between organisations.</p><p>Our measure of progress is not the number of screens. It is whether each participant can understand its responsibility and reconcile the result.</p>", "image_side": "left"}), cta("Help shape the operating standard.", "We are speaking with employers, providers and specialists who know where existing processes break.", "Talk with us", "/enquire/contact/")])
+        self._ensure_founder_profile(about)
         self._standard(home, "Privacy", "privacy", "Privacy notice", "A plain-language overview of information handled by the public website. Product-platform privacy notices are provided separately to participating institutions.", [features("Public website information", [("What we collect", "Contact and organisation details you choose to submit, plus limited security metadata."), ("Why", "To respond, assess onboarding interest, handle complaints and protect forms from abuse."), ("What not to send", "Do not submit passwords, one-time codes, full identity numbers, payroll files or salary details."), ("Your request", "Contact the team to ask about access, correction or deletion where applicable.")])])
         self._standard(home, "Terms", "terms", "Website terms", "This website provides information and enquiry channels. It does not grant portal access, approve a loan or authorise a payroll deduction.", [features("Using this website", [("Accurate enquiries", "Submit information you are authorised to provide."), ("No sensitive uploads", "Public forms are not a channel for employee or payroll files."), ("No financial decision", "Illustrations and explanations are not credit approval or legal advice."), ("Separate agreements", "Live institutional use requires signed terms, onboarding and approved operating controls.")])])
         insights = InsightIndexPage.objects.child_of(home).filter(slug="insights").first()
@@ -119,7 +125,39 @@ class Command(BaseCommand):
             page.save_revision().publish()
 
     def _standard(self, parent, title, slug, eyebrow, intro, body):
-        if not StandardPage.objects.child_of(parent).filter(slug=slug).exists():
+        page = StandardPage.objects.child_of(parent).filter(slug=slug).first()
+        if page is None:
             page = StandardPage(title=title, slug=slug, show_in_menus=slug in {"how-it-works", "trust", "about"}, eyebrow=eyebrow, introduction=intro, body=body)
             parent.add_child(instance=page)
             page.save_revision().publish()
+        return page
+
+    def _ensure_founder_profile(self, page):
+        if any(block.block_type == "founder" for block in page.body):
+            return
+        image_model = get_image_model()
+        image = image_model.objects.filter(title="Precious Ngwira, Chief Executive Officer").first()
+        if image is None:
+            source = Path(settings.BASE_DIR) / "static/images/precious-ngwira-founder.jpg"
+            with source.open("rb") as image_file:
+                image = image_model(
+                    title="Precious Ngwira, Chief Executive Officer",
+                    file=ImageFile(image_file, name="precious-ngwira-founder.jpg"),
+                )
+                image.save()
+        profile = {
+            "type": "founder",
+            "id": str(uuid4()),
+            "value": {
+                "image": image.pk,
+                "name": "Precious Ngwira",
+                "role": "Chief Executive Officer",
+                "heading": "Building trust between every participant in the payroll process.",
+                "body": "<p>Precious leads the team developing a clearer operating layer for employers and financial providers. The work begins with a practical belief: financial access can grow without making privacy, payroll control or accountability weaker.</p>",
+            },
+        }
+        body = list(page.body.raw_data)
+        insert_at = len(body) - 1 if body and body[-1]["type"] == "call_to_action" else len(body)
+        body.insert(insert_at, profile)
+        page.body = body
+        page.save_revision().publish()

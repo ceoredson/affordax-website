@@ -39,4 +39,33 @@ Brand names, colours, legal name, public contacts and the portal link are manage
 .venv/bin/python manage.py makemigrations --check --dry-run
 DJANGO_SETTINGS_MODULE=config.settings.production SECRET_KEY=test DATABASE_URL=sqlite:///production-check.sqlite3 ALLOWED_HOSTS=example.com CSRF_TRUSTED_ORIGINS=https://example.com PUBLIC_SITE_URL=https://example.com .venv/bin/python manage.py check --deploy
 ```
+## Public website
 
+This is the public Wagtail website for ADMP/Affordax. It is a standalone
+Django project and Git repository, separate from `backend/`.
+
+### Local development
+
+```bash
+cp .env.example .env
+python -m venv .venv
+source .venv/bin/activate
+pip install -r requirements-dev.txt
+python manage.py migrate
+python manage.py seed_site
+python manage.py runserver
+```
+
+The local settings use SQLite by default. To test against Supabase, replace
+`DATABASE_URL` in `.env` with a Supabase PostgreSQL connection string.
+
+### Render deployment with Supabase
+
+`render.yaml` defines one web service. In Render, set `DATABASE_URL` to the
+Supabase connection string and configure the other `sync: false` values from
+the Render dashboard. Render runs `scripts/build.sh` during build and
+`scripts/start.sh` on boot; the latter applies migrations, seeds the Wagtail
+site, and starts Gunicorn.
+
+Do not commit `.env` or Supabase credentials. The committed `.env.example` is
+safe to use as a starting point.

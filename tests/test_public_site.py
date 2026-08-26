@@ -31,6 +31,13 @@ def test_seeded_pages_are_public(client, seeded_site, path):
     assert client.get(path).status_code == 200
 
 
+def test_about_page_introduces_company_leadership(client, seeded_site):
+    content = client.get("/about/").content.decode()
+    assert "Precious Ngwira" in content
+    assert "Chief Executive Officer" in content
+    assert "precious-ngwira" in content
+
+
 @pytest.mark.django_db
 def test_employer_enquiry_is_persisted_before_notification(client, settings):
     settings.ENQUIRY_NOTIFICATION_EMAIL = ""

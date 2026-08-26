@@ -15,9 +15,7 @@ services:
       - key: SECRET_KEY
         generateValue: true
       - key: DATABASE_URL
-        fromDatabase:
-          name: public-website-database
-          property: connectionString
+        sync: false
       - key: ALLOWED_HOSTS
         sync: false
       - key: CSRF_TRUSTED_ORIGINS
@@ -38,11 +36,3 @@ services:
       name: public-website-media
       mountPath: /opt/render/project/src/media
       sizeGB: 1
-
-databases:
-  - name: public-website-database
-    plan: basic-256mb
-    databaseName: public_website
-    user: public_website
-    ipAllowList: []
-
