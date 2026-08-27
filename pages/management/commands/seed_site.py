@@ -1,5 +1,6 @@
 from datetime import date
 from pathlib import Path
+from urllib.parse import urlparse
 from uuid import uuid4
 
 from django.conf import settings
@@ -98,7 +99,16 @@ class Command(BaseCommand):
             for value, label in [("Private", "provider views designed around allocated affordability"), ("Governed", "financial actions with accountable approvals"), ("Traceable", "outcomes connected through reconciliation")]:
                 HomeProofPoint.objects.create(page=home, value=value, label=label)
             home.save_revision().publish()
-        Site.objects.update_or_create(is_default_site=True, defaults={"hostname": "localhost", "port": 8000, "site_name": "Public website", "root_page": home})
+        public_url = urlparse(settings.PUBLIC_SITE_URL)
+        Site.objects.update_or_create(
+            is_default_site=True,
+            defaults={
+                "hostname": public_url.hostname or "localhost",
+                "port": public_url.port or (443 if public_url.scheme == "https" else 8000),
+                "site_name": "Public website",
+                "root_page": home,
+            },
+        )
         self._audience(home, "Employers", "employers", "For employers", "Give payroll teams one accountable deduction workflow.", "Move from scattered instructions to controlled employee records, independent payroll approval and visible collection outcomes.", "Start an employer conversation", "/enquire/employer/", EMPLOYER_BODY)
         self._audience(home, "Financial providers", "providers", "For financial providers", "Know what can be allocated. Follow what was collected.", "Originate salary-backed products through an authorised, privacy-conscious workflow connected to payroll and reconciliation.", "Start a provider conversation", "/enquire/provider/", PROVIDER_BODY)
         self._standard(home, "How it works", "how-it-works", "The operating model", "Four linked decisions—not one black-box score.", [process("The complete path", [("Employee request", "The provider records purpose and authority evidence."), ("Affordability", "Configured policy returns a privacy-safe allocation."), ("Reservation and approval", "A temporary hold supports an independently reviewed instruction."), ("Payroll and reconciliation", "Every due obligation receives a result and every variance can be investigated.")]), cta("See it against your own process.", "A useful demonstration starts with the questions your teams already argue about.", "Book a conversation", "/enquire/demo/")])
