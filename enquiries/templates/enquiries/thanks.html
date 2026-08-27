@@ -1,4 +1,4 @@
 {% extends "base.html" %}
 {% block title %}Request received{% endblock %}
+{% block robots %}noindex,nofollow{% endblock %}
 {% block content %}<section class="thank-you"><div class="thank-you__card" data-reveal><span class="thank-you__mark">✓</span><p class="eyebrow">Received</p><h1>Your request is now with a person.</h1><p>We will review it and respond through the contact details you supplied. We will not ask for a password or one-time code.</p>{% if reference %}<p class="reference">Reference <strong>{{ reference }}</strong></p>{% endif %}<a class="button button--ink" href="/">Return home</a></div></section>{% endblock %}
-

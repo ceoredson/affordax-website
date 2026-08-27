@@ -86,6 +86,90 @@ PROVIDER_BODY = [
 ]
 
 
+SEO_BY_SLUG = {
+    "home": (
+        "Payroll Affordability & Deductions in Malawi",
+        "Affordax connects Malawi employers and financial providers through controlled affordability checks, payroll deductions, collection outcomes and reconciliation.",
+    ),
+    "employers": (
+        "Payroll Deduction Management for Malawi Employers",
+        "Give payroll teams a controlled workflow for employee records, deduction instructions, monthly processing, exceptions and reconciliation in Malawi.",
+    ),
+    "providers": (
+        "Salary-Backed Lending Infrastructure in Malawi",
+        "Connect affordability checks, governed deduction approvals, payroll collection outcomes and reconciliation for licensed financial providers in Malawi.",
+    ),
+    "how-it-works": (
+        "How Affordax Payroll Deductions Work",
+        "See how Affordax connects employee-authorised affordability enquiries, reservations, independent approvals, payroll outcomes and reconciliation.",
+    ),
+    "trust": (
+        "Security, Privacy and Payroll Controls",
+        "Understand the access controls, independent approvals, privacy boundaries, audit evidence and operational safeguards designed into Affordax.",
+    ),
+    "about": (
+        "About Affordax Malawi",
+        "Affordax is building accountable affordability, payroll deduction and reconciliation infrastructure for Malawi's private-sector employers and providers.",
+    ),
+    "privacy": (
+        "Privacy Notice",
+        "Read how the Affordax public website handles enquiry details, security metadata and requests concerning personal information.",
+    ),
+    "terms": (
+        "Website Terms",
+        "Read the terms that apply when using the Affordax public website and its employer, provider, demonstration and contact enquiry channels.",
+    ),
+    "insights": (
+        "Payroll Affordability Insights for Malawi",
+        "Practical articles about salary affordability, payroll deductions, responsible lending, privacy and reconciliation in Malawi's private sector.",
+    ),
+    "reservation-is-not-a-deduction": (
+        "Why an Affordability Reservation Is Not a Deduction",
+        "Learn why temporarily reserving affordability and activating a payroll deduction are separate decisions with different controls and evidence.",
+    ),
+    "payroll-affordability-malawi": (
+        "What Is Payroll Affordability in Malawi?",
+        "A practical explanation of payroll affordability, protected take-home pay and responsible salary-backed commitments for Malawi employees and lenders.",
+    ),
+    "payroll-deduction-management": (
+        "How Payroll Deduction Management Protects Employees",
+        "See how controlled instructions, validation, priority rules, exception handling and reconciliation improve payroll deductions for every participant.",
+    ),
+    "salary-backed-lending-malawi": (
+        "Salary-Backed Lending in Malawi's Private Sector",
+        "Explore how verified employment, affordability controls, governed payroll deductions and reconciliation can support responsible lending in Malawi.",
+    ),
+}
+
+
+INSIGHT_ARTICLES = [
+    {
+        "title": "Why a reservation is not a deduction",
+        "slug": "reservation-is-not-a-deduction",
+        "summary": "Temporary capacity and an approved payroll obligation solve different problems. Treating them as one creates confusion and risk.",
+        "body": "<h2>Two different decisions</h2><p>A reservation temporarily protects allocated monthly capacity while an application is completed. It expires or is consumed. It is not yet an instruction to payroll.</p><h2>The approval seam</h2><p>An obligation becomes eligible for collection only after the required product, terms, evidence and independent approval are recorded.</p>",
+    },
+    {
+        "title": "What is payroll affordability in Malawi?",
+        "slug": "payroll-affordability-malawi",
+        "summary": "Payroll affordability asks what an employee can responsibly commit each month while preserving statutory deductions and protected take-home pay.",
+        "body": "<h2>Affordability is a monthly capacity, not a salary disclosure</h2><p>A useful affordability decision answers a narrow question: what monthly amount can this employee allocate without crossing the applicable protected take-home boundary? A financial provider needs that decision and the state of its own commitments. It does not need an unrestricted view of the employee's payslip or another provider's portfolio.</p><h2>The calculation must begin with reliable payroll facts</h2><p>Gross pay alone is not enough. A controlled process starts with current employer-supplied payroll information, accounts for statutory deductions and applies the configured protection policy before considering existing authorised commitments. Because salaries and employment status can change, the result is point-in-time evidence rather than a permanent promise.</p><h2>Reservations prevent the same capacity being promised twice</h2><p>When an employee continues an application, a short-lived reservation can hold the allocated amount while approval is completed. The hold must expire if the application does not progress. Only an independently approved obligation should become eligible for payroll collection.</p><h2>Payroll remains the collection reality</h2><p>An earlier affordability result cannot guarantee that every future payroll period will collect in full. Leave, salary changes, termination and higher-priority deductions can affect the outcome. That is why each period needs a clear requested amount, collected amount and exception reason.</p><h2>A responsible process stays explainable</h2><p>Employees, employers and providers should be able to understand why a decision was made, who approved it and what happened in payroll. The specific legal, employment and product rules always depend on the applicable agreements and Malawi requirements; technology should make those rules visible and consistently operated.</p>",
+    },
+    {
+        "title": "How payroll deduction management protects employees and employers",
+        "slug": "payroll-deduction-management",
+        "summary": "A controlled deduction workflow replaces scattered instructions with validation, independent approval, visible exceptions and reconciled outcomes.",
+        "body": "<h2>The risk begins before payroll is run</h2><p>When deduction instructions arrive through unrelated emails, spreadsheets and bilateral processes, payroll teams spend valuable time deciding which record is current. Employees face the risk of duplicated, obsolete or unaffordable deductions, while providers struggle to explain missing collections.</p><h2>One instruction needs one accountable lifecycle</h2><p>A sound process records the employee, provider, amount, start conditions and supporting authority. Material changes should follow a maker-checker process rather than silently editing the active instruction. Cancellation, correction and reversal need preserved evidence so the history remains understandable.</p><h2>Validation should happen before confirmation</h2><p>Payroll files should be checked for the correct employer, period, employee identifiers, duplicate rows and usable salary values. Separating upload from confirmation gives another authorised person the opportunity to review errors before financial processing begins.</p><h2>Exceptions are outcomes, not missing data</h2><p>Every due obligation should receive a period outcome, including when nothing was collected. Full, partial, zero, suspended and reversed results allow each participant to distinguish an affordability protection from a processing failure.</p><h2>Reconciliation closes the operational loop</h2><p>After payroll, expected and observed amounts should be compared by employer and provider. Differences need a named owner, supporting evidence and a dispute path. This turns month-end from a search across inboxes into a process that can be reviewed and improved.</p>",
+    },
+    {
+        "title": "Salary-backed lending in Malawi's private sector",
+        "slug": "salary-backed-lending-malawi",
+        "summary": "Responsible salary-backed lending depends on verified employment, privacy-conscious affordability, governed deductions and transparent collection outcomes.",
+        "body": "<h2>Employment can support access without becoming unrestricted access</h2><p>Formal employment gives a lender useful evidence about regular income, but it should not open an employee's full payroll record to every provider. A neutral affordability layer can return an allocation for the requesting institution while keeping salary components and competing obligations private.</p><h2>Origination and collection are connected but distinct</h2><p>The provider still owns product design, credit assessment and the lending relationship. Payroll deduction management does not issue the loan. It coordinates the authorised monthly obligation and reports what happened when the employer processed payroll.</p><h2>Independent approval protects the instruction</h2><p>A reservation should not automatically become a deduction. Product terms, authority evidence and the proposed monthly amount need review by an appropriately authorised person. Increases and replacements should receive fresh affordability evidence.</p><h2>Collection outcomes improve portfolio decisions</h2><p>Providers need more than a total remittance. They need stable outcomes for each expected collection: requested, collected, partial, suspended, reversed or completed. That history supports customer service, portfolio monitoring and reconciliation without exposing another provider's data.</p><h2>Trust comes from operating discipline</h2><p>Employers need predictable files and fewer bilateral exceptions. Employees need protected take-home pay and understandable commitments. Providers need reliable evidence and timely results. A shared, auditable workflow can align those needs while leaving each institution responsible for its legal and contractual duties.</p>",
+    },
+]
+
+
 class Command(BaseCommand):
     help = "Create a carefully designed initial public website without overwriting editorial work."
 
@@ -122,10 +206,18 @@ class Command(BaseCommand):
             insights = InsightIndexPage(title="Insights", slug="insights", introduction="Short, practical notes on affordability, payroll operations, privacy and reconciliation.", show_in_menus=True)
             home.add_child(instance=insights)
             insights.save_revision().publish()
-        if not InsightPage.objects.child_of(insights).exists():
-            article = InsightPage(title="Why a reservation is not a deduction", slug="reservation-is-not-a-deduction", publication_date=date.today(), summary="Temporary capacity and an approved payroll obligation solve different problems. Treating them as one creates confusion and risk.", body="<h2>Two different decisions</h2><p>A reservation temporarily protects allocated monthly capacity while an application is completed. It expires or is consumed. It is not yet an instruction to payroll.</p><h2>The approval seam</h2><p>An obligation becomes eligible for collection only after the required product, terms, evidence and independent approval are recorded.</p>")
-            insights.add_child(instance=article)
-            article.save_revision().publish()
+        for article_data in INSIGHT_ARTICLES:
+            if not InsightPage.objects.child_of(insights).filter(slug=article_data["slug"]).exists():
+                article = InsightPage(
+                    title=article_data["title"],
+                    slug=article_data["slug"],
+                    publication_date=date(2026, 8, 27),
+                    summary=article_data["summary"],
+                    body=article_data["body"],
+                )
+                insights.add_child(instance=article)
+                article.save_revision().publish()
+        self._apply_seo(home)
         self.stdout.write(self.style.SUCCESS("Initial public website content is ready."))
 
     def _audience(self, parent, title, slug, label, hero, text, action, url, body):
@@ -141,6 +233,19 @@ class Command(BaseCommand):
             parent.add_child(instance=page)
             page.save_revision().publish()
         return page
+
+    def _apply_seo(self, home):
+        pages = [home, *Page.objects.descendant_of(home).specific()]
+        for page in pages:
+            seo = SEO_BY_SLUG.get(page.slug)
+            if seo is None:
+                continue
+            seo_title, search_description = seo
+            if page.seo_title == seo_title and page.search_description == search_description:
+                continue
+            page.seo_title = seo_title
+            page.search_description = search_description
+            page.save_revision().publish()
 
     def _ensure_founder_profile(self, page):
         if any(block.block_type == "founder" for block in page.body):

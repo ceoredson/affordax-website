@@ -26,6 +26,17 @@ def test_seeded_homepage_is_server_rendered(client, seeded_site):
     assert "One accountable thread" in content
 
 
+def test_homepage_uses_public_canonical_and_structured_data(client, seeded_site, settings):
+    settings.PUBLIC_SITE_URL = "https://affordax.com"
+    settings.ALLOWED_HOSTS.append("affordax-website.onrender.com")
+    response = client.get("/", HTTP_HOST="affordax-website.onrender.com")
+    content = response.content.decode()
+    assert '<link rel="canonical" href="https://affordax.com/">' in content
+    assert '"@type":"WebSite"' in content
+    assert '"@type":"Organization"' in content
+    assert "Payroll Affordability &amp; Deductions in Malawi" in content
+
+
 @pytest.mark.parametrize("path", ["/employers/", "/providers/", "/how-it-works/", "/trust/", "/about/", "/privacy/", "/terms/", "/insights/"])
 def test_seeded_pages_are_public(client, seeded_site, path):
     assert client.get(path).status_code == 200
@@ -36,6 +47,25 @@ def test_about_page_introduces_company_leadership(client, seeded_site):
     assert "Precious Ngwira" in content
     assert "Chief Executive Officer" in content
     assert "precious-ngwira" in content
+
+
+@pytest.mark.parametrize(
+    "path",
+    [
+        "/insights/payroll-affordability-malawi/",
+        "/insights/payroll-deduction-management/",
+        "/insights/salary-backed-lending-malawi/",
+    ],
+)
+def test_search_focused_insights_are_published(client, seeded_site, path):
+    response = client.get(path)
+    assert response.status_code == 200
+    assert '"@type":"Article"' in response.content.decode()
+
+
+def test_enquiry_pages_are_not_indexable(client, seeded_site):
+    assert 'content="noindex,follow"' in client.get("/enquire/contact/").content.decode()
+    assert 'content="noindex,nofollow"' in client.get("/enquire/thanks/").content.decode()
 
 
 @pytest.mark.django_db

@@ -1,5 +1,9 @@
 {% extends "base.html" %}
 {% load wagtailcore_tags %}
+{% block extra_head %}
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"WebSite","name":"Affordax","alternateName":"Affordax Malawi","url":"{{ configured_public_site_url|escapejs }}/"}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"Organization","name":"Affordax","url":"{{ configured_public_site_url|escapejs }}/","description":"Affordability, payroll deduction and reconciliation infrastructure for Malawi's private sector.","areaServed":{"@type":"Country","name":"Malawi"},"address":{"@type":"PostalAddress","addressLocality":"Lilongwe","addressCountry":"MW"}{% if settings.brand.SiteIdentity.linkedin_url %},"sameAs":["{{ settings.brand.SiteIdentity.linkedin_url|escapejs }}"]{% endif %}}</script>
+{% endblock %}
 {% block content %}
 <section class="hero hero--home">
   <div class="shell hero__grid">
@@ -25,4 +29,3 @@
 </section>
 {% for block in page.body %}{% include_block block %}{% endfor %}
 {% endblock %}
-
