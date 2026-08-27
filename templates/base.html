@@ -37,7 +37,7 @@
       </a>
       <button class="menu-button" type="button" data-menu-button aria-controls="primary-menu" aria-expanded="false"><span></span><span></span><span></span><span class="sr-only">Open navigation</span></button>
       {% primary_navigation %}
-      <a class="button button--ink site-header__portal" href="{{ settings.brand.SiteIdentity.portal_url|default:configured_portal_url }}">Institution sign in <span aria-hidden="true">↗</span></a>
+      <a class="button button--ink site-header__portal" href="{{ configured_portal_url }}">Institution sign in <span aria-hidden="true">↗</span></a>
     </div>
   </header>
   <main id="content">{% block content %}{% endblock %}</main>
@@ -46,7 +46,7 @@
       <div><a class="wordmark wordmark--light" href="/"><span class="wordmark__signal"></span>{{ settings.brand.SiteIdentity.display_name|default:'Company' }}</a><p>{{ settings.brand.SiteIdentity.descriptor|default:'Affordability and payroll, connected' }}</p></div>
       <div><span class="footer-label">Explore</span><a href="/how-it-works/">How it works</a><a href="/employers/">For employers</a><a href="/providers/">For providers</a><a href="/insights/">Insights</a></div>
       <div><span class="footer-label">Company</span><a href="/about/">About</a><a href="/trust/">Trust centre</a><a href="{% url 'enquiries:form' 'contact' %}">Contact</a><a href="{% url 'enquiries:form' 'complaint' %}">Complaints</a></div>
-      <div><span class="footer-label">Access</span><a href="{{ settings.brand.SiteIdentity.portal_url|default:configured_portal_url }}">Institution portal ↗</a><a href="/privacy/">Privacy</a><a href="/terms/">Terms</a></div>
+      <div><span class="footer-label">Access</span><a href="{{ configured_portal_url }}">Institution portal ↗</a><a href="/privacy/">Privacy</a><a href="/terms/">Terms</a></div>
     </div>
     <div class="shell site-footer__bottom"><span>© {% now "Y" %} {{ settings.brand.SiteIdentity.legal_name|default:'Company' }}</span><span>{{ settings.brand.SiteIdentity.office|default:'Lilongwe, Malawi' }}</span><span>Built for accountable work.</span></div>
   </footer>

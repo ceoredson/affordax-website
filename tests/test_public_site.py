@@ -37,6 +37,13 @@ def test_homepage_uses_public_canonical_and_structured_data(client, seeded_site,
     assert "Payroll Affordability &amp; Deductions in Malawi" in content
 
 
+def test_portal_links_use_the_deployment_portal_url(client, seeded_site, settings):
+    settings.PORTAL_URL = "https://portal.affordax.com"
+    content = client.get("/").content.decode()
+    assert content.count('href="https://portal.affordax.com"') == 2
+    assert "portal.example.com" not in content
+
+
 @pytest.mark.parametrize("path", ["/employers/", "/providers/", "/how-it-works/", "/trust/", "/about/", "/privacy/", "/terms/", "/insights/"])
 def test_seeded_pages_are_public(client, seeded_site, path):
     assert client.get(path).status_code == 200

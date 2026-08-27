@@ -108,6 +108,6 @@ DEFAULT_FROM_EMAIL = os.environ.get("DEFAULT_FROM_EMAIL", "website@localhost")
 ENQUIRY_NOTIFICATION_EMAIL = os.environ.get("ENQUIRY_NOTIFICATION_EMAIL", "")
 
 PUBLIC_SITE_URL = os.environ.get("PUBLIC_SITE_URL", "http://localhost:8000").rstrip("/")
-PORTAL_URL = os.environ.get("PORTAL_URL", "https://portal.example.com").rstrip("/")
+PORTAL_URL = os.environ.get("PORTAL_URL", "https://portal.affordax.com").rstrip("/")
 SITE_NAME = os.environ.get("SITE_NAME", "Affordax")
 SITE_DESCRIPTOR = os.environ.get("SITE_DESCRIPTOR", "Affordability and payroll, connected")
