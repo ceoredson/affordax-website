@@ -1,6 +1,7 @@
 # Affordax Logo Design Brief
 
-Status: Draft  
+Status: Direction A implemented for public-site testing
+
 Date: 27 August 2026
 
 ## Objective
@@ -131,3 +132,11 @@ and an explanation limited to three sentences.
 6. Complete a trademark search before treating it as legally locked.
 7. Approve the master artwork, then roll it into both sites through shared assets
    and design tokens.
+
+## Implemented candidate
+
+The current Direction A candidate is stored in `static/brand/logo/`. Its A
+silhouette uses Ink, its Red crossbar represents the protected floor, and a short
+Green endpoint introduces a restrained Malawi cue. It has passed initial SVG and
+small-icon rendering checks but remains open to optical refinement and trademark
+review.

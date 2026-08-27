@@ -14,7 +14,7 @@ class SiteIdentity(BaseSiteSetting):
     phone = models.CharField(max_length=32, blank=True)
     office = models.CharField(max_length=140, default="Lilongwe, Malawi")
     linkedin_url = models.URLField(blank=True)
-    primary_colour = models.CharField(max_length=7, default="#ef5b3f")
+    primary_colour = models.CharField(max_length=7, default="#ce1126")
     ink_colour = models.CharField(max_length=7, default="#17202a")
 
     panels = [
@@ -26,8 +26,4 @@ class SiteIdentity(BaseSiteSetting):
             FieldPanel("support_email"), FieldPanel("partnerships_email"),
             FieldPanel("phone"), FieldPanel("office"), FieldPanel("linkedin_url"),
         ], heading="Contact"),
-        MultiFieldPanel([
-            FieldPanel("primary_colour"), FieldPanel("ink_colour"),
-        ], heading="Brand colours"),
     ]
-

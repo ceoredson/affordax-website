@@ -4,7 +4,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
-  <meta name="theme-color" content="{{ settings.brand.SiteIdentity.ink_colour|default:'#17202a' }}">
+  <meta name="theme-color" content="#17202a">
   <title>{% block title %}{% if page.seo_title %}{{ page.seo_title }}{% elif page %}{{ page.title }}{% else %}Public website{% endif %} · {{ settings.brand.SiteIdentity.display_name|default:'Company' }}{% endblock %}</title>
   <meta name="description" content="{% block description %}{{ page.search_description|default:'Clear information for employers and financial providers.' }}{% endblock %}">
   <meta name="robots" content="{% block robots %}index,follow,max-image-preview:large{% endblock %}">
@@ -14,17 +14,22 @@
   <meta property="og:title" content="{% if page.seo_title %}{{ page.seo_title }}{% elif page %}{{ page.title }}{% else %}Public website{% endif %}">
   <meta property="og:description" content="{{ page.search_description|default:'Clear information for employers and financial providers.' }}">
   <meta property="og:url" content="{{ configured_public_site_url }}{{ request.path }}">
-  <meta property="og:image" content="{{ configured_public_site_url }}{% static 'images/social-preview.svg' %}">
+  <meta property="og:image" content="{{ configured_public_site_url }}{% static 'images/social-preview.png' %}">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="{% if page.seo_title %}{{ page.seo_title }}{% elif page %}{{ page.title }}{% else %}Public website{% endif %}">
   <meta name="twitter:description" content="{{ page.search_description|default:'Clear information for employers and financial providers.' }}">
-  <meta name="twitter:image" content="{{ configured_public_site_url }}{% static 'images/social-preview.svg' %}">
-  <link rel="icon" href="{% static 'images/favicon.svg' %}" type="image/svg+xml">
+  <meta name="twitter:image" content="{{ configured_public_site_url }}{% static 'images/social-preview.png' %}">
+  <link rel="icon" href="{% static 'brand/icons/favicon.svg' %}" type="image/svg+xml">
+  <link rel="icon" href="{% static 'brand/icons/favicon-32.png' %}" sizes="32x32" type="image/png">
+  <link rel="apple-touch-icon" href="{% static 'brand/icons/apple-touch-icon.png' %}">
+  <link rel="manifest" href="{% static 'brand/icons/site.webmanifest' %}">
+  <link rel="stylesheet" href="{% static 'brand/tokens/brand.css' %}">
   <link rel="stylesheet" href="{% static 'css/tokens.css' %}">
   <link rel="stylesheet" href="{% static 'css/base.css' %}">
   <link rel="stylesheet" href="{% static 'css/components.css' %}">
   <link rel="stylesheet" href="{% static 'css/pages.css' %}">
-  <style>:root{--brand:{{ settings.brand.SiteIdentity.primary_colour|default:'#ef5b3f' }};--ink:{{ settings.brand.SiteIdentity.ink_colour|default:'#17202a' }}}</style>
   {% block extra_head %}{% endblock %}
 </head>
 <body>
@@ -32,8 +37,8 @@
   <header class="site-header" data-header>
     <div class="shell site-header__inner">
       <a class="wordmark" href="/" aria-label="{{ settings.brand.SiteIdentity.display_name|default:'Company' }} home">
-        <span class="wordmark__signal" aria-hidden="true"></span>
-        <span>{{ settings.brand.SiteIdentity.display_name|default:'Company' }}</span>
+        <img class="wordmark__mark" src="{% static 'brand/logo/affordax-mark.svg' %}" alt="" width="30" height="30">
+        <span class="wordmark__name">{{ settings.brand.SiteIdentity.display_name|default:'Affordax' }}</span>
       </a>
       <button class="menu-button" type="button" data-menu-button aria-controls="primary-menu" aria-expanded="false"><span></span><span></span><span></span><span class="sr-only">Open navigation</span></button>
       {% primary_navigation %}
@@ -43,7 +48,7 @@
   <main id="content">{% block content %}{% endblock %}</main>
   <footer class="site-footer">
     <div class="shell site-footer__top">
-      <div><a class="wordmark wordmark--light" href="/"><span class="wordmark__signal"></span>{{ settings.brand.SiteIdentity.display_name|default:'Company' }}</a><p>{{ settings.brand.SiteIdentity.descriptor|default:'Affordability and payroll, connected' }}</p></div>
+      <div><a class="wordmark wordmark--light" href="/" aria-label="{{ settings.brand.SiteIdentity.display_name|default:'Affordax' }} home"><img class="wordmark__mark" src="{% static 'brand/logo/affordax-mark-white.svg' %}" alt="" width="34" height="34"><span class="wordmark__name">{{ settings.brand.SiteIdentity.display_name|default:'Affordax' }}</span></a><p>{{ settings.brand.SiteIdentity.descriptor|default:'Affordability and payroll, connected' }}</p></div>
       <div><span class="footer-label">Explore</span><a href="/how-it-works/">How it works</a><a href="/employers/">For employers</a><a href="/providers/">For providers</a><a href="/insights/">Insights</a></div>
       <div><span class="footer-label">Company</span><a href="/about/">About</a><a href="/trust/">Trust centre</a><a href="{% url 'enquiries:form' 'contact' %}">Contact</a><a href="{% url 'enquiries:form' 'complaint' %}">Complaints</a></div>
       <div><span class="footer-label">Access</span><a href="{{ configured_portal_url }}">Institution portal ↗</a><a href="/privacy/">Privacy</a><a href="/terms/">Terms</a></div>

@@ -1,7 +1,9 @@
 # Affordax Brand System Plan
 
-Status: Draft for design exploration  
-Version: 0.1  
+Status: Direction A implementation candidate; not legally locked
+
+Version: 0.2
+
 Date: 27 August 2026
 
 ## Purpose
@@ -186,3 +188,10 @@ Before approval, test the identity:
 The brand can be locked when it is recognisable as Affordax, strong in one color,
 clear at favicon size, credible in public and portal contexts, subtly Malawian,
 accessible, reproducible, and cleared by a basic trademark search.
+
+## Current implementation candidate
+
+Direction A, Protected Horizon, is implemented on the public site under
+`static/brand/`. It includes Ink and reversed logo marks, SVG and PNG browser
+icons, shared CSS tokens, and the social preview treatment. This is a working
+candidate for real-world testing, not final trademark-approved master artwork.
