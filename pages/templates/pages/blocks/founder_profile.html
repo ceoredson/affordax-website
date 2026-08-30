@@ -1,9 +1,14 @@
-{% load wagtailcore_tags wagtailimages_tags %}
+{% load static image_tags wagtailcore_tags wagtailimages_tags %}
 <section class="section founder-profile" data-reveal>
   <div class="shell founder-profile__grid">
     <figure class="founder-profile__portrait">
-      {% image value.image fill-920x1120 format-webp as portrait %}
-      <img src="{{ portrait.url }}" width="{{ portrait.width }}" height="{{ portrait.height }}" alt="{{ value.name }}, {{ value.role }}" loading="lazy">
+      {% image_source_exists value.image as portrait_available %}
+      {% if portrait_available %}
+        {% image value.image fill-920x1120 format-webp as portrait %}
+        <img src="{{ portrait.url }}" width="{{ portrait.width }}" height="{{ portrait.height }}" alt="{{ value.name }}, {{ value.role }}" loading="lazy">
+      {% else %}
+        <img src="{% static 'images/precious-ngwira-founder.jpg' %}" width="375" height="504" alt="{{ value.name }}, {{ value.role }}" loading="lazy">
+      {% endif %}
       <figcaption>{{ value.name }} · {{ value.role }}</figcaption>
     </figure>
     <div class="founder-profile__story">

@@ -1,5 +1,8 @@
+from pathlib import Path
+
 import pytest
 from django.core.management import call_command
+from wagtail.images import get_image_model
 
 from enquiries.models import Enquiry, EnquiryKind
 
@@ -54,6 +57,21 @@ def test_about_page_introduces_company_leadership(client, seeded_site):
     assert "Precious Ngwira" in content
     assert "Chief Executive Officer" in content
     assert "precious-ngwira" in content
+
+
+@pytest.mark.django_db
+def test_about_page_uses_static_portrait_when_uploaded_media_is_missing(client, settings, tmp_path):
+    settings.MEDIA_ROOT = tmp_path
+    call_command("seed_site", verbosity=0)
+    portrait = get_image_model().objects.get(title="Precious Ngwira, Chief Executive Officer")
+    Path(portrait.file.path).unlink()
+    portrait.renditions.all().delete()
+
+    response = client.get("/about/")
+
+    assert response.status_code == 200
+    assert "/static/images/precious-ngwira-founder" in response.content.decode()
+    assert "/media/not-found" not in response.content.decode()
 
 
 @pytest.mark.parametrize(
