@@ -12,6 +12,19 @@ Independent public information, publishing and enquiry website. Internal package
 
 No code or database access is shared with the private institutional portal. The portal is linked through the configurable `PORTAL_URL` only.
 
+## Product experience
+
+The home page includes an accessible three-workspace walkthrough with explicitly
+illustrative figures. Tabs support arrow keys, Home and End; all panels remain
+readable when JavaScript is disabled. The walkthrough links to the appropriate
+institution enquiry and uses no live payroll information.
+
+Enquiry pages select their kind from the route, tailor fields to that request,
+identify required fields, support browser autofill and provide linked error
+summaries. A modified hidden kind cannot bypass the provider licence or employer
+workforce requirements. Successful submissions remain in the website database
+and trigger the configured notification after commit.
+
 ## Local setup
 
 ```bash

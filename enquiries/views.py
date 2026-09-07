@@ -35,7 +35,11 @@ def enquiry_page(request, page_name):
     except KeyError as exc:
         raise Http404 from exc
     initial = {"kind": page.kind}
-    form = style_form(EnquiryForm(request.POST or None, initial=initial))
+    data = None
+    if request.method == "POST":
+        data = request.POST.copy()
+        data["kind"] = page.kind
+    form = style_form(EnquiryForm(data, initial=initial))
     if request.method == "POST" and form.is_valid():
         enquiry = submit_enquiry(
             form.cleaned_data,

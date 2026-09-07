@@ -1,4 +1,5 @@
 (() => {
+  document.querySelector('[data-error-summary]')?.focus();
   const header = document.querySelector('[data-header]');
   const menu = document.querySelector('[data-menu]');
   const button = document.querySelector('[data-menu-button]');
@@ -17,6 +18,50 @@
       menu.classList.remove('is-open');
       button?.setAttribute('aria-expanded', 'false');
     }
+  });
+
+  document.addEventListener('keydown', (event) => {
+    if (event.key === 'Escape' && menu?.classList.contains('is-open')) {
+      menu.classList.remove('is-open');
+      button?.setAttribute('aria-expanded', 'false');
+      button?.focus();
+    }
+  });
+
+  document.querySelectorAll('[data-product-tour]').forEach((tour) => {
+    const tabs = [...tour.querySelectorAll('[data-tour-tab]')];
+    const panels = [...tour.querySelectorAll('[data-tour-panel]')];
+    const tablist = tour.querySelector('[data-tour-tabs]');
+    tablist.hidden = false;
+    tablist.setAttribute('role', 'tablist');
+    const activate = (selected, focus = false) => {
+      tabs.forEach((tab, index) => {
+        const active = index === selected;
+        tab.setAttribute('role', 'tab');
+        tab.setAttribute('aria-selected', String(active));
+        tab.setAttribute('aria-controls', tab.dataset.tourTab);
+        tab.tabIndex = active ? 0 : -1;
+        panels[index].hidden = !active;
+        panels[index].setAttribute('role', 'tabpanel');
+        panels[index].setAttribute('aria-labelledby', tab.id);
+        panels[index].tabIndex = 0;
+      });
+      if (focus) tabs[selected].focus();
+    };
+    tabs.forEach((tab, index) => {
+      tab.addEventListener('click', () => activate(index));
+      tab.addEventListener('keydown', (event) => {
+        let selected = index;
+        if (event.key === 'ArrowRight') selected = (index + 1) % tabs.length;
+        else if (event.key === 'ArrowLeft') selected = (index - 1 + tabs.length) % tabs.length;
+        else if (event.key === 'Home') selected = 0;
+        else if (event.key === 'End') selected = tabs.length - 1;
+        else return;
+        event.preventDefault();
+        activate(selected, true);
+      });
+    });
+    activate(0);
   });
 
   const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;

@@ -1,0 +1,65 @@
+<section id="product-tour" class="product-tour shell" aria-labelledby="product-tour-title" data-product-tour>
+  <div class="product-tour__intro">
+    <p class="eyebrow">See the work, not just the promise</p>
+    <h2 id="product-tour-title">A clearer working day.<br>For everyone in the process.</h2>
+    <p>Move from scattered files and follow-up calls to a shared record of what needs to happen next.</p>
+  </div>
+  <div class="product-tour__tabs" aria-label="Explore a workspace" data-tour-tabs hidden>
+    <button type="button" id="tour-employer-tab" data-tour-tab="tour-employer">For employers</button>
+    <button type="button" id="tour-provider-tab" data-tour-tab="tour-provider">For financial providers</button>
+    <button type="button" id="tour-operations-tab" data-tour-tab="tour-operations">For platform operations</button>
+  </div>
+  <div id="tour-employer" class="product-tour__panel" data-tour-panel>
+    <div class="product-tour__story">
+      <span class="product-tour__number">01 / PAYROLL, WITH A CLEAR NEXT STEP</span>
+      <h3>Know what is ready.<br>Know what needs you.</h3>
+      <p>Upload your payroll, see the rows that need attention, and give a separate checker the information needed to approve a run.</p>
+      <ul><li>CSV, Excel and JSON file support</li><li>Employee-level validation and correction reports</li><li>Collection outcomes with a traceable history</li></ul>
+      <a class="text-link" href="{% url 'enquiries:form' 'employer' %}">Discuss your payroll workflow <span aria-hidden="true">→</span></a>
+    </div>
+    <div class="product-preview" aria-label="Illustrative employer workspace">
+      <div class="product-preview__bar"><strong>Payroll workspace</strong><span>Illustrative preview</span></div>
+      <div class="product-preview__body">
+        <p class="product-preview__eyebrow">THIS MONTH’S PAYROLL</p>
+        <h4>Your next step is clear.</h4>
+        <div class="product-preview__metrics"><div><strong>248</strong><span>Employee rows</span></div><div><strong>3</strong><span>Need correction</span></div></div>
+        <ol class="product-preview__steps"><li><span>01</span><div><b>File received</b><small>Input preserved with a checksum</small></div><em>Complete</em></li><li><span>02</span><div><b>Review validation</b><small>Resolve the listed row errors</small></div><em class="needs-attention">Your next step</em></li><li><span>03</span><div><b>Independent confirmation</b><small>A different payroll checker reviews</small></div><em>Up next</em></li></ol>
+      </div>
+    </div>
+  </div>
+  <div id="tour-provider" class="product-tour__panel" data-tour-panel>
+    <div class="product-tour__story">
+      <span class="product-tour__number">02 / RESPONSIBLE ORIGINATION</span>
+      <h3>From authorised enquiry<br>to an accountable decision.</h3>
+      <p>Record employee authority, check available affordability, and submit an application for independent approval. Each person sees the information their role needs.</p>
+      <ul><li>Salary details remain protected from other institutions</li><li>Time-limited reservations prevent competing holds</li><li>Top-ups and amendments follow an approval trail</li></ul>
+      <a class="text-link" href="{% url 'enquiries:form' 'provider' %}">Discuss provider access <span aria-hidden="true">→</span></a>
+    </div>
+    <div class="product-preview" aria-label="Illustrative financial provider workspace">
+      <div class="product-preview__bar"><strong>Provider workspace</strong><span>Illustrative preview</span></div>
+      <div class="product-preview__body">
+        <p class="product-preview__eyebrow">APPLICATION REVIEW</p><h4>A decision with context.</h4>
+        <div class="product-preview__notice">Employee authority recorded · Salary breakdown protected</div>
+        <ol class="product-preview__steps"><li><span>01</span><div><b>Affordability checked</b><small>Allocation for the requesting institution</small></div><em>Recorded</em></li><li><span>02</span><div><b>Reservation created</b><small>Temporary capacity hold</small></div><em>Recorded</em></li><li><span>03</span><div><b>Supervisor review</b><small>The submitting officer cannot self-approve</small></div><em class="needs-attention">Next step</em></li></ol>
+      </div>
+    </div>
+  </div>
+  <div id="tour-operations" class="product-tour__panel" data-tour-panel>
+    <div class="product-tour__story">
+      <span class="product-tour__number">03 / OVERSIGHT THAT LEADS TO ACTION</span>
+      <h3>Follow the exception.<br>Keep the evidence.</h3>
+      <p>Review institution documents, investigate collection differences, and resolve disputes with a recorded reason. Operational oversight starts with the work awaiting attention.</p>
+      <ul><li>Institution onboarding and document review</li><li>Reconciliation and dispute work queues</li><li>Audit history, billing and operational reporting</li></ul>
+      <a class="text-link" href="{% url 'enquiries:form' 'demo' %}">Walk through the platform <span aria-hidden="true">→</span></a>
+    </div>
+    <div class="product-preview" aria-label="Illustrative platform operations workspace">
+      <div class="product-preview__bar"><strong>Operations workspace</strong><span>Illustrative preview</span></div>
+      <div class="product-preview__body">
+        <p class="product-preview__eyebrow">REVIEW QUEUE</p><h4>Attention where it matters.</h4>
+        <ol class="product-preview__steps"><li><span>01</span><div><b>Institution documents</b><small>Verify evidence or record a rejection reason</small></div><em>Review</em></li><li><span>02</span><div><b>Collection differences</b><small>Compare expected and observed outcomes</small></div><em>Investigate</em></li><li><span>03</span><div><b>Open disputes</b><small>Record findings and resolution</small></div><em>Resolve</em></li></ol>
+        <div class="product-preview__notice">Financial corrections preserve the original evidence.</div>
+      </div>
+    </div>
+  </div>
+  <p class="product-tour__footnote">Illustrative workflows and sample figures. Access and available actions depend on institution approval and the assigned role.</p>
+</section>

@@ -18,22 +18,30 @@ class EnquiryForm(forms.Form):
     marketing_opt_in = forms.BooleanField(required=False, label="Send me occasional company and product updates.")
     website = forms.CharField(required=False, widget=forms.HiddenInput, label="Leave empty")
 
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        kind = self.initial.get('kind') or self.data.get('kind')
+        if kind != EnquiryKind.EMPLOYER:
+            self.fields.pop('employee_count')
+        if kind != EnquiryKind.PROVIDER:
+            self.fields.pop('licence_reference')
+        if kind in {EnquiryKind.EMPLOYER, EnquiryKind.PROVIDER, EnquiryKind.DEMO}:
+            self.fields['organisation'].required = True
+            self.fields['organisation'].error_messages['required'] = 'Enter your organisation name.'
+        if kind == EnquiryKind.EMPLOYER:
+            self.fields['employee_count'].required = True
+            self.fields['employee_count'].error_messages['required'] = 'Enter an approximate employee count.'
+        if kind == EnquiryKind.PROVIDER:
+            self.fields['licence_reference'].required = True
+            self.fields['licence_reference'].error_messages['required'] = 'Enter the institution licence or registration reference.'
+        for name, token in {'full_name': 'name', 'email': 'email', 'phone': 'tel',
+                            'organisation': 'organization', 'job_title': 'organization-title'}.items():
+            self.fields[name].widget.attrs['autocomplete'] = token
+
     def clean_website(self):
         if self.cleaned_data.get("website"):
             raise forms.ValidationError("Unable to submit this request.")
         return ""
-
-    def clean(self):
-        data = super().clean()
-        kind = data.get("kind")
-        if kind in {EnquiryKind.EMPLOYER, EnquiryKind.PROVIDER, EnquiryKind.DEMO} and not data.get("organisation"):
-            self.add_error("organisation", "Enter your organisation name.")
-        if kind == EnquiryKind.EMPLOYER and not data.get("employee_count"):
-            self.add_error("employee_count", "Enter an approximate employee count.")
-        if kind == EnquiryKind.PROVIDER and not data.get("licence_reference"):
-            self.add_error("licence_reference", "Enter the institution licence or registration reference.")
-        return data
-
 
 FIELD_PLACEHOLDERS = {
     "full_name": "e.g. Thandiwe Phiri",
@@ -54,4 +62,3 @@ def style_form(form):
             field.widget.attrs["class"] = "field__control"
             field.widget.attrs["placeholder"] = FIELD_PLACEHOLDERS.get(name, "")
     return form
-
