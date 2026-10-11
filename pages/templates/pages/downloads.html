@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}Download Affordax · Desktop workspace{% endblock %}
+{% block description %}Download the Affordax institutional desktop workspace for Windows, macOS and Linux. Your existing account and permissions apply.{% endblock %}
+{% block extra_head %}<link rel="stylesheet" href="{% static 'css/downloads.css' %}">{% endblock %}
+{% block content %}
+<section class="shell downloads-intro">
+  <p class="downloads-eyebrow">Affordax desktop</p>
+  <h1>Your institutional workspace.<br>On your desktop.</h1>
+  <p class="downloads-lead">Workforce, payroll and employee lending workflows, connected to the same Affordax backend. Sign in with your institution’s existing account; your role determines what you can access.</p>
+  {% if release %}<p class="downloads-status">Verified release {{ release.version }}{% if stale %} · Showing the last confirmed release while updates are checked.{% endif %}</p>
+  {% else %}<p class="downloads-status" role="status">Public installers are not published yet. Builds are being prepared; use the institution portal in the meantime.</p>{% endif %}
+  <a class="button button--ink" href="{{ configured_portal_url }}">Open the institution portal ↗</a>
+</section>
+<section class="shell downloads-grid" aria-label="Choose your operating system">
+  {% for card in cards %}<article class="download-card">
+    <h2>{{ card.title }}</h2><p>{{ card.description }}</p>
+    {% for artifact in card.artifacts %}
+      <a class="button button--ink" href="{{ artifact.url }}" rel="noopener">Download {{ artifact.format }} · {{ artifact.bytes|filesizeformat }}</a>
+      <details class="download-integrity"><summary>Verify this installer</summary><p>SHA-256</p><code>{{ artifact.sha256 }}</code><p>Compare this value with the checksum of the downloaded file before installing.</p></details>
+    {% empty %}<p class="download-pending">Installer publication pending</p>{% endfor %}
+  </article>{% endfor %}
+</section>
+<section class="shell downloads-guidance">
+  <div><h2>One account. The same permissions.</h2><p>The app is for authorised employer and financial-provider teams. Downloading it does not create an account, approve a loan or grant access to employee records.</p></div>
+  <div><h2>Install with confidence.</h2><p>Only published release assets appear here. Check the version, operating-system architecture and checksum. If your organisation manages software centrally, ask its IT administrator to install the app.</p></div>
+</section>
+{% endblock %}

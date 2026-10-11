@@ -8,10 +8,12 @@ from wagtail.admin import urls as wagtailadmin_urls
 from wagtail.contrib.sitemaps.views import sitemap
 from wagtail.documents import urls as wagtaildocs_urls
 
+from pages.downloads import downloads
 from pages.views import health, robots
 
 urlpatterns = [
     path("health/", health, name="health"),
+    path("downloads/", downloads, name="downloads"),
     path("robots.txt", robots, name="robots"),
     path("sitemap.xml", sitemap, name="sitemap"),
     path("site-admin/", include(wagtailadmin_urls)),

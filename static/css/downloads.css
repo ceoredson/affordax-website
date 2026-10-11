@@ -1,0 +1,17 @@
+.downloads-intro { padding-block: 4.5rem 3rem; max-width: 980px; }
+.downloads-eyebrow { color: var(--brand); font-weight: 700; letter-spacing: .06em; text-transform: uppercase; font-size: .8rem; }
+.downloads-intro h1 { font-family: var(--sans); font-size: clamp(2.2rem, 5vw, 4rem); line-height: 1.08; letter-spacing: -.03em; margin-block: 1rem 1.5rem; }
+.downloads-lead { max-width: 720px; font-size: 1.15rem; color: var(--muted); line-height: 1.7; }
+.downloads-status { padding: 1rem 1.25rem; background: white; border-left: 3px solid var(--brand); margin-block: 1.5rem; }
+.downloads-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1.5rem; }
+.download-card { background: white; border: 1px solid var(--line); border-radius: 12px; padding: 2rem; display: flex; flex-direction: column; align-items: flex-start; gap: 1rem; }
+.download-card h2 { font-family: var(--sans); font-size: 1.6rem; margin: 0; }
+.download-card > p { color: var(--muted); margin: 0; }
+.download-pending { padding-block: .8rem; font-weight: 600; }
+.download-integrity { width: 100%; font-size: .9rem; }
+.download-integrity summary { cursor: pointer; padding-block: .8rem; font-weight: 600; }
+.download-integrity code { display: block; overflow-wrap: anywhere; font-size: .8rem; background: var(--paper); padding: .8rem; }
+.downloads-guidance { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 3rem; padding-block: 3rem 5rem; }
+.downloads-guidance h2 { font-family: var(--sans); font-size: 1.4rem; }
+.downloads-guidance p { color: var(--muted); line-height: 1.7; }
+@media (max-width: 700px) { .downloads-grid, .downloads-guidance { grid-template-columns: 1fr; } .download-card { padding: 1.5rem; } .downloads-intro { padding-top: 3rem; } }
