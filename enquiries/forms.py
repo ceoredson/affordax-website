@@ -6,7 +6,7 @@ from .models import EnquiryKind
 class EnquiryForm(forms.Form):
     kind = forms.ChoiceField(choices=EnquiryKind.choices, widget=forms.HiddenInput)
     full_name = forms.CharField(max_length=160, label="Your name")
-    email = forms.EmailField(label="Work email")
+    email = forms.EmailField(label="Email")
     phone = forms.CharField(max_length=32, required=False)
     organisation = forms.CharField(max_length=180, required=False)
     job_title = forms.CharField(max_length=120, required=False)
@@ -45,7 +45,7 @@ class EnquiryForm(forms.Form):
 
 FIELD_PLACEHOLDERS = {
     "full_name": "e.g. Thandiwe Phiri",
-    "email": "name@organisation.mw",
+    "email": "e.g. name@gmail.com",
     "phone": "+265 …",
     "organisation": "Organisation name",
     "job_title": "Your role",
